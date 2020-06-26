@@ -110,14 +110,14 @@
   text-align: right;
   cursor: pointer;
 }
-.real-app[data-v-235ba445] {
+.real-app[data-v-233b41f5] {
   margin: 0 auto;
   width: 500px;
   text-align: center;
   background-color: #fff;
   box-shadow: 0 0 20px 1px;
 }
-.add-input[data-v-235ba445] {
+.add-input[data-v-233b41f5] {
   width: 100%;
   text-indent: 60px;
   font-size: 16px;
@@ -126,7 +126,7 @@
   border: none;
   border-bottom: 1px dashed #e5e5e5;
 }
-.add-input[data-v-235ba445]:focus {
+.add-input[data-v-233b41f5]:focus {
   outline: none;
 }
 .footer {
@@ -163,7 +163,7 @@ body {
   font-size: 20px;
 }
 body {
-  background: url(gamersky_01origin_01_20192231544383-todos.jpg) no-repeat center;
+  background: url(background-todos.jpg) no-repeat center;
   background-size: cover;
 }
 div {

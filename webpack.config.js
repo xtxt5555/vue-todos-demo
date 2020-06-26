@@ -34,20 +34,6 @@ const config = {
             }
           }
         ]
-      },
-      {
-        test: /\.styl/,
-        use: [
-          'style-loader',
-          'css-loader',
-          {
-            loader: 'postcss-loader',
-            options: {
-              sourceMap: true,
-            }
-          },
-          'stylus-loader'
-        ]
       }
     ]
   },
@@ -79,6 +65,20 @@ if (isDev) {
     },
     hot: true
   }
+  config.module.rules.push({
+    test: /\.styl/,
+    use: [
+      'style-loader',
+      'css-loader',
+      {
+        loader: 'postcss-loader',
+        options: {
+          sourceMap: true,
+        }
+      },
+      'stylus-loader'
+    ]
+  })
   config.plugins.push(
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin()
@@ -88,7 +88,7 @@ if (isDev) {
     app: resolve('src/index.js'),
     vendor: ['vue'],
   }
-  config.output.filename = '[name].[chunckhash:8].js'
+  config.output.filename = '[name].[chunkhash:8].js'
   config.module.rules.push({
     test: /\.styl/,
     use: ExtractPlugin.extract({
@@ -106,9 +106,12 @@ if (isDev) {
     })
   })
   config.plugins.push(
-    new ExtractPlugin('styles.[contentHash:8.css'),
+    new ExtractPlugin('styles.[contenthash:8].css'),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor'
+    }),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'runtime'
     })
   )
 }
