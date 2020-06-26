@@ -18,8 +18,8 @@
 </template>
 
 <script>
-import Item from 'components/item.vue'
-import Tabs from 'components/tabs.vue'
+import Item from 'components/item'
+import Tabs from 'components/tabs'
 let id = 0 //todo的key
 
 export default {
