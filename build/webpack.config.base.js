@@ -29,7 +29,7 @@ module.exports = {
             loader: 'url-loader',
             options: {
               limit: 1024,
-              name: '[name]-todos.[ext]'
+              name: 'resources/[name].[hash:8].[ext]'
             }
           }
         ]
