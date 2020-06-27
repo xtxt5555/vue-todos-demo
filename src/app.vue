@@ -8,9 +8,9 @@
 </template>
 
 <script>
-import Header from './components/header'
-import Todo from './components/todo'
-import Footer from './components/footer'
+import Header from './layout/header.vue'
+import Todo from './views/todo/todo.vue'
+import Footer from './layout/footer.jsx'
 
 export default {
   components: {

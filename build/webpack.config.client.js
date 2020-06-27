@@ -38,10 +38,11 @@ if (isDev) {
           test: /\.styl/,
           use: [
             'style-loader',
+            'css-loader',
             {
               loader: 'postcss-loader',
               options: {
-                sourceMap: true
+                sourceMap: true,
               }
             },
             'stylus-loader'

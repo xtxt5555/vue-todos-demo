@@ -32,10 +32,9 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: ['.vue', '.jsx', 'styl', '.js', '.json'],
+    extensions: ['styl', '.js', '.json'],
     alias: {
       styles: path.join(__dirname, '../src/assets/styles'),
-      components: path.join(__dirname,'../src/components')
     }
   },
 }
