@@ -1,23 +1,26 @@
 <template>
   <div class="tabs">
     <div class="undo">
-      {{leftNum}} items left
+      {{ leftNum }} items left
     </div>
     <div class="states">
       <span
         :class="state === 'all' ? 'active' : ''"
-        @click="changeState"
+        @click="change-state"
       >all</span>
       <span
         :class="state === 'active' ? 'active' : ''"
-        @click="changeState"
+        @click="change-state"
       >active</span>
       <span
         :class="state === 'completed' ? 'active' : ''"
-        @click="changeState"
+        @click="change-state"
       >completed</span>
     </div>
-    <div class="clear" @click="deleteCompleted">
+    <div
+      class="clear"
+      @click="delete-completed"
+    >
       Clear Completed
     </div>
   </div>
@@ -28,20 +31,20 @@ export default {
   props: {
     state: {
       type: String,
-      required: true,
+      required: true
     },
     leftNum: {
       type: Number,
-      required: true,
+      required: true
     }
   },
   methods: {
-    changeState(eve) {
-      this.$emit('changeState', eve.target.innerHTML)
+    changeState (eve) {
+      this.$emit('change-state', eve.target.innerHTML)
     },
-    deleteCompleted() {
-      this.$emit('deleteCompleted')
-    },
+    deleteCompleted () {
+      this.$emit('delete-completed')
+    }
   }
 }
 </script>
@@ -73,7 +76,7 @@ export default {
 
         &.active
           border 1px solid #CC143C
-    
+
     .clear
       text-align right
       cursor pointer

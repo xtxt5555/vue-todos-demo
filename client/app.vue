@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <div id="cover"></div>
+    <div id="cover" />
     <Header />
     <Todo />
     <Footer />
@@ -16,7 +16,7 @@ export default {
   components: {
     Header,
     Todo,
-    Footer,
+    Footer
   }
 }
 </script>
@@ -28,7 +28,7 @@ export default {
   right: 0;
   top: 0;
   bottom: 0;
-  
+
 #cover
   position: absolute;
   left: 0;

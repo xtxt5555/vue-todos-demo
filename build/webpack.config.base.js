@@ -1,8 +1,10 @@
 const path = require('path')
+const createVueLoaderOptions = require('../vue-loader.config')
+const isDev = process.env.NODE_ENV === 'development'
 
 module.exports = {
   target: 'web',
-  entry: path.join(__dirname, '../src/index.js'),
+  entry: path.join(__dirname, '../client/index.js'),
   output: {
     filename: 'bundle.[hash:8].js',
     path: path.join(__dirname, '../dist')
@@ -10,8 +12,19 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.(vue|js|jsx)$/,
+        loader: 'eslint-loader',
+        exclude: /node_modules/,
+        enforce: 'pre'
+      },
+      {
         test: /\.vue$/,
-        loader: 'vue-loader'
+        use: [
+          {
+            loader: 'vue-loader',
+            options: createVueLoaderOptions(isDev)
+          }
+        ]
       },
       {
         test: /\.jsx$/,
@@ -34,7 +47,7 @@ module.exports = {
   resolve: {
     extensions: ['styl', '.js', '.json'],
     alias: {
-      styles: path.join(__dirname, '../src/assets/styles'),
+      styles: path.join(__dirname, '../client/assets/styles'),
     }
   },
 }

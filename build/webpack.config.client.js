@@ -2,12 +2,10 @@ const webpack = require('webpack')
 const path = require('path')
 const ExtractPlugin = require('extract-text-webpack-plugin')
 const merge = require('webpack-merge')
-const baseConfig = require('./webpack.config.base.js')
+const baseConfig = require('./webpack.config.base')
 const { VueLoaderPlugin } = require('vue-loader')
 const HTMLPlugin = require('html-webpack-plugin')
 const isDev = process.env.NODE_ENV === 'development'
-
-
 const defaultPlugins = [
   new VueLoaderPlugin(),
   new webpack.DefinePlugin({
@@ -37,7 +35,17 @@ if (isDev) {
         {
           test: /\.styl/,
           use: [
-            'style-loader',
+            'vue-style-loader',
+            // {
+            //   loader: 'css-loader',
+            //   options: {
+            //     modules: {
+            //       auto: /header\.vue/,
+            //       localIdentName: '[name]-[hash:base64:5]',
+            //     },
+            //     localsConvention: 'camelCase',
+            //   }
+            // },
             'css-loader',
             {
               loader: 'postcss-loader',
@@ -59,7 +67,7 @@ if (isDev) {
 } else {
   config = merge(baseConfig, {
     entry: {
-      app: path.join(__dirname, '../src/index.js'),
+      app: path.join(__dirname, '../client/index.js'),
       vendor: ['vue']
     },
     output: {
@@ -70,7 +78,7 @@ if (isDev) {
         {
           test: /\.styl/,
           use: ExtractPlugin.extract({
-            fallback: 'style-loader',
+            fallback: 'vue-style-loader',
             use: [
               'css-loader',
               {
