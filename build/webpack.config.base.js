@@ -1,9 +1,4 @@
 const path = require('path')
-const webpack = require('webpack')
-const { VueLoaderPlugin } = require('vue-loader')
-const HTMLPlugin = require('html-webpack-plugin')
-
-const isDev = process.env.NODE_ENV === 'development'
 
 module.exports = {
   target: 'web',
@@ -36,15 +31,6 @@ module.exports = {
       }
     ]
   },
-  plugins: [
-    new VueLoaderPlugin(),
-    new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: isDev ? '"development"' : '"production"',
-      }
-    }),
-    new HTMLPlugin()
-  ],
   resolve: {
     extensions: ['.vue', '.jsx', 'styl', '.js', '.json'],
     alias: {
