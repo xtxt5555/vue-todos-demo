@@ -6,8 +6,10 @@
       :checked="todo.completed ? 'checked' : ''"
       @click="toggleCompleted"
     >
-    <label>{{todo.message}}</label>
-    <button @click="deleteTodo">x</button>
+    <label>{{ todo.message }}</label>
+    <button @click="deleteTodo">
+      x
+    </button>
   </div>
 </template>
 
@@ -16,15 +18,17 @@ export default {
   props: {
     todo: {
       type: Object,
+      default () {
+        return {}
+      }
     }
   },
   methods: {
-    toggleCompleted() {
+    toggleCompleted () {
       this.$emit('toggle', this.todo.key)
-      console.log(this.todo.key);
-      
+      console.log(this.todo.key)
     },
-    deleteTodo() {
+    deleteTodo () {
       this.$emit('delete', this.todo.key)
     }
   }
@@ -72,7 +76,6 @@ export default {
         text-decoration line-through
         color: #e5e5e5
         transition color ease 0.3s
-
 
     label
       color #3f3f3f
