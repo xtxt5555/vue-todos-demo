@@ -1,12 +1,13 @@
-.main-header {
+.main-header[data-v-9305fa70] {
   height: 200px;
 }
-.main-header h1 {
+.main-header h1[data-v-9305fa70] {
   font-size: 100px;
   line-height: 200px;
   text-align: center;
   color: #cc143c;
 }
+
 .item[data-v-ac9e39f2] {
   text-align: center;
   position: relative;
@@ -74,6 +75,7 @@
   opacity: 0;
   transition: opacity ease 0.3s;
 }
+
 .tabs[data-v-4c1a549e] {
   font-size: 12px;
   overflow: hidden;
@@ -110,6 +112,7 @@
   text-align: right;
   cursor: pointer;
 }
+
 .real-app[data-v-4546dc56] {
   margin: 0 auto;
   width: 500px;
@@ -129,12 +132,14 @@
 .add-input[data-v-4546dc56]:focus {
   outline: none;
 }
+
 .footer {
   font-size: 12px;
   text-align: center;
   color: #e6e6e6;
   margin-top: 50px;
 }
+
 #app[data-v-938a4c80] {
   position: absolute;
   left: 0;
@@ -152,6 +157,7 @@
   opacity: 0.7;
   z-index: -1;
 }
+
 * {
   margin: 0;
   padding: 0;
@@ -169,3 +175,4 @@ body {
 div {
   box-sizing: border-box;
 }
+

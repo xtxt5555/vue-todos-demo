@@ -1,10 +1,10 @@
 <template>
-  <div :class="$style.mainHeader">
+  <div class="main-header">
     <h1>MYTODO</h1>
   </div>
 </template>
 
-<style lang="stylus" module>
+<style lang="stylus" scoped>
   .main-header
     height 200px
     h1

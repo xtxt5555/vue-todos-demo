@@ -1,6 +1,6 @@
 const webpack = require('webpack')
 const path = require('path')
-const ExtractPlugin = require('extract-text-webpack-plugin')
+const ExtractPlugin = require('mini-css-extract-plugin')
 const merge = require('webpack-merge')
 const baseConfig = require('./webpack.config.base')
 const { VueLoaderPlugin } = require('vue-loader')
@@ -60,7 +60,7 @@ if (isDev) {
     },
     plugins: defaultPlugins.concat([
       new webpack.HotModuleReplacementPlugin(),
-      new webpack.NoEmitOnErrorsPlugin()
+      // new webpack.NoEmitOnErrorsPlugin()  //for webpack3
     ]),
     devServer,
   })
@@ -68,7 +68,7 @@ if (isDev) {
   config = merge(baseConfig, {
     entry: {
       app: path.join(__dirname, '../client/index.js'),
-      vendor: ['vue']
+      // vendor: ['vue']
     },
     output: {
       filename: '[name].[chunkhash:8].js'
@@ -77,31 +77,38 @@ if (isDev) {
       rules: [
         {
           test: /\.styl/,
-          use: ExtractPlugin.extract({
-            fallback: 'vue-style-loader',
-            use: [
-              'css-loader',
-              {
-                loader: 'postcss-loader',
-                options: {
-                  sourceMap: true
-                }
-              },
-              'stylus-loader'
-            ]
-          })
+          use: [
+            'vue-style-loader',
+            ExtractPlugin.loader,
+            'css-loader',
+            {
+              loader: 'postcss-loader',
+              options: {
+                sourceMap: true
+              }
+            },
+            'stylus-loader'
+          ]
         }
       ]
     },
     plugins: defaultPlugins.concat([
-      new ExtractPlugin('styles.[contenthash:8].css'),
-      new webpack.optimize.CommonsChunkPlugin({
-        name: 'vendor'
-      }),
-      new webpack.optimize.CommonsChunkPlugin({
-        name: 'runtime'
+      new ExtractPlugin({
+        filename: 'styles.[hash:8].css'
       })
-    ])
+      // new webpack.optimize.CommonsChunkPlugin({  //for webpack3
+      //   name: 'vendor'
+      // }),
+      // new webpack.optimize.CommonsChunkPlugin({
+      //   name: 'runtime'
+      // })
+    ]),
+    optimization: {
+      splitChunks: {
+        chunks: 'all',
+      },
+      runtimeChunk: true,
+    }
   })
 }
 
