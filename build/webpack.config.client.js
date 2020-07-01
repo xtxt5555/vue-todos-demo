@@ -5,6 +5,7 @@ const merge = require('webpack-merge')
 const baseConfig = require('./webpack.config.base')
 const { VueLoaderPlugin } = require('vue-loader')
 const HTMLPlugin = require('html-webpack-plugin')
+const { VueSSRClientPlugin: VueClientPlugin } = require('vue-ssr-webpack-plugin')
 const isDev = process.env.NODE_ENV === 'development'
 const defaultPlugins = [
   new VueLoaderPlugin(),
@@ -13,7 +14,10 @@ const defaultPlugins = [
       NODE_ENV: isDev ? '"development"' : '"production"'
     }
   }),
-  new HTMLPlugin()
+  new HTMLPlugin({
+    template: path.join(__dirname, 'template.html')
+  }),
+  new VueClientPlugin()
 ]
 
 const devServer = {
@@ -22,7 +26,8 @@ const devServer = {
   overlay: {
     errors: true
   },
-  hot: true
+  hot: true,
+  historyApiFallback: true
 }
 
 let config
@@ -50,7 +55,7 @@ if (isDev) {
             {
               loader: 'postcss-loader',
               options: {
-                sourceMap: true,
+                sourceMap: true
               }
             },
             'stylus-loader'
@@ -59,15 +64,15 @@ if (isDev) {
       ]
     },
     plugins: defaultPlugins.concat([
-      new webpack.HotModuleReplacementPlugin(),
+      new webpack.HotModuleReplacementPlugin()
       // new webpack.NoEmitOnErrorsPlugin()  //for webpack3
     ]),
-    devServer,
+    devServer
   })
 } else {
   config = merge(baseConfig, {
     entry: {
-      app: path.join(__dirname, '../client/index.js'),
+      app: path.join(__dirname, '../client/index.js')
       // vendor: ['vue']
     },
     output: {
@@ -105,9 +110,9 @@ if (isDev) {
     ]),
     optimization: {
       splitChunks: {
-        chunks: 'all',
+        chunks: 'all'
       },
-      runtimeChunk: true,
+      runtimeChunk: true
     }
   })
 }

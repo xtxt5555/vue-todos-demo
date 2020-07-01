@@ -8,7 +8,10 @@ module.exports = {
   entry: path.join(__dirname, '../client/index.js'),
   output: {
     filename: 'bundle.[hash:8].js',
-    path: path.join(__dirname, '../dist')
+    // path: path.join(__dirname, '../dist'),
+    // publicPath: 'http://127.0.0.1:8000/'
+    path: path.join(__dirname, '../public'),
+    publicPath: 'http://127.0.0.1:8000/public/'
   },
   module: {
     rules: [
@@ -46,9 +49,9 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: ['styl', '.js', '.json'],
+    extensions: ['.styl', '.js', '.json'],
     alias: {
-      styles: path.join(__dirname, '../client/assets/styles'),
+      styles: path.join(__dirname, '../client/assets/styles')
     }
-  },
+  }
 }

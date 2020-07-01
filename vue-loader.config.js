@@ -1,8 +1,7 @@
 module.exports = isDev => {
   return {
     preserveWhitespace: false,
-    extractCSS: !isDev,
+    extractCSS: !isDev
     // hotReload: false, // 自动配置
-    
   }
 }

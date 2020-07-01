@@ -5,21 +5,21 @@
     </div>
     <div class="states">
       <span
-        :class="state === 'all' ? 'active' : ''"
-        @click="change-state"
+        :class="{active: state === 'all'}"
+        @click="changeState"
       >all</span>
       <span
-        :class="state === 'active' ? 'active' : ''"
-        @click="change-state"
+        :class="{active: state === 'active'}"
+        @click="changeState"
       >active</span>
       <span
-        :class="state === 'completed' ? 'active' : ''"
-        @click="change-state"
+        :class="{active: state === 'completed'}"
+        @click="changeState"
       >completed</span>
     </div>
     <div
       class="clear"
-      @click="delete-completed"
+      @click="deleteCompleted"
     >
       Clear Completed
     </div>
