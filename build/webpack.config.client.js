@@ -23,17 +23,21 @@ const defaultPlugins = [
 const devServer = {
   port: 8000,
   host: '0.0.0.0',
+  headers: { 'Access-Control-Allow-Origin': '*' },
   overlay: {
     errors: true
   },
   hot: true,
-  historyApiFallback: true
+  historyApiFallback: {
+    index: '/public/index.html'
+  }
 }
 
 let config
 
 if (isDev) {
   config = merge(baseConfig, {
+    entry: path.join(__dirname, '../client/client-entry'),
     devtool: '#cheap-eval-module-source-map',
     module: {
       rules: [
@@ -71,19 +75,17 @@ if (isDev) {
   })
 } else {
   config = merge(baseConfig, {
-    entry: {
-      app: path.join(__dirname, '../client/index.js')
-      // vendor: ['vue']
-    },
+    entry: path.join(__dirname, '../client/'),
     output: {
-      filename: '[name].[chunkhash:8].js'
+      filename: '[name].[chunkhash:8].js',
+      publicPath: '/public/'
     },
     module: {
       rules: [
         {
           test: /\.styl/,
           use: [
-            'vue-style-loader',
+            // 'vue-style-loader',
             ExtractPlugin.loader,
             'css-loader',
             {
@@ -112,7 +114,8 @@ if (isDev) {
       splitChunks: {
         chunks: 'all'
       },
-      runtimeChunk: true
+      runtimeChunk: true,
+      noEmitOnErrors: true
     }
   })
 }

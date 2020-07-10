@@ -2,16 +2,20 @@
   <div id="app">
     <div id="cover" />
     <Header />
-    <router-link to="/app">
+    <!-- <router-link to="/app">
       app
     </router-link>
     <router-link to="/login">
       login
-    </router-link>
+    </router-link> -->
     <!-- <Todo /> -->
     <transition name="fade">
       <router-view />
     </transition>
+    <!-- <Notification content="test notify" /> -->
+    <button @click="btnClick">
+      点我
+    </button>
     <Footer />
   </div>
 </template>
@@ -22,10 +26,24 @@ import Header from './layout/header.vue'
 import Footer from './layout/footer.jsx'
 
 export default {
+  metaInfo: {
+    title: "XT's Todo App"
+  },
   components: {
     Header,
     // Todo,
     Footer
+  },
+  mounted () {
+
+  },
+  methods: {
+    btnClick () {
+      this.$notify({
+        content: 'test $notify',
+        btn: 'close'
+      })
+    }
   }
 }
 </script>

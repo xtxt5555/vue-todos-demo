@@ -5,6 +5,7 @@ const merge = require('webpack-merge')
 const baseConfig = require('./webpack.config.base')
 const { VueLoaderPlugin } = require('vue-loader')
 const { VueSSRServerPlugin: VueServerPlugin } = require('vue-ssr-webpack-plugin')
+// const nodeExternals = require('webpack-node-externals')
 
 const isDev = process.env.NODE_ENV === 'development'
 
@@ -53,7 +54,14 @@ const config = merge(baseConfig, {
     }),
     new VueLoaderPlugin(),
     new VueServerPlugin()
+    // new ExtractPlugin({
+    //   filename: 'styles.[hash:8].css'
+    // })
   ]
 })
+
+if (!isDev) {
+  config.output.publicPath = '/public/'
+}
 
 module.exports = config

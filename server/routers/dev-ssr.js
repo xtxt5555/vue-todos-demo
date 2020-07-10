@@ -19,7 +19,6 @@ serverCompiler.watch({}, (err, stats) => {
   stats = stats.toJson()
   stats.errors.forEach(err => console.log(err))
   stats.warnings.forEach(warn => console.log(warn))
-
   const bundlePath = path.join(
     serverConfig.output.path,
     'vue-ssr-bundle.json'

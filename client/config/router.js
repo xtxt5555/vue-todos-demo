@@ -1,11 +1,11 @@
-import Router from 'vue-router'
+import VueRouter from 'vue-router'
 import routes from './routes'
 
 export default () => {
-  return new Router({
+  return new VueRouter({
     routes,
     mode: 'history',
-    // base: '/base/', //和publicPath类似
+    // base: '/public/', // 和publicPath类似
     // linkActiveClass: //部分符合路由在router-link上添加class
     // linkExactActiveClass: //完全符合路由在router-link上添加class
     scrollBehavior (to, from, savedPostion) {

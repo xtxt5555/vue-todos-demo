@@ -3,20 +3,6 @@
     <div class="undo">
       {{ leftNum }} items left
     </div>
-    <div class="states">
-      <span
-        :class="{active: state === 'all'}"
-        @click="changeState"
-      >all</span>
-      <span
-        :class="{active: state === 'active'}"
-        @click="changeState"
-      >active</span>
-      <span
-        :class="{active: state === 'completed'}"
-        @click="changeState"
-      >completed</span>
-    </div>
     <div
       class="clear"
       @click="deleteCompleted"
@@ -39,9 +25,6 @@ export default {
     }
   },
   methods: {
-    changeState (eve) {
-      this.$emit('change-state', eve.target.innerHTML)
-    },
     deleteCompleted () {
       this.$emit('delete-completed')
     }
@@ -60,22 +43,9 @@ export default {
     .undo,.states,.clear
       display inline-block
       height $tabsHeight
-      width 32%
+      width 49%
     .undo
       text-indent 15px
-    .states
-      text-align center
-      line-height $tabsHeight - 10
-      padding-top 5px
-      span
-        display inline-block
-        margin-right 1px
-        padding 0 5px
-        border-radius 5px
-        cursor pointer
-
-        &.active
-          border 1px solid #CC143C
 
     .clear
       text-align right

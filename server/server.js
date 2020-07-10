@@ -1,6 +1,9 @@
+const path = require('path')
+
 const Koa = require('koa')
-const pageRouter = require('./routers/dev-ssr')
+const staticRouter = require('./routers/static.js')
 const isDev = process.env.NODE_ENV === 'development'
+const send = require('koa-send')
 
 const app = new Koa()
 app.use(async (ctx, next) => {
@@ -15,6 +18,27 @@ app.use(async (ctx, next) => {
     } else {
       ctx.body = 'please try again later'
     }
+  }
+})
+
+app
+  .use(staticRouter.routes())
+  .use(staticRouter.allowedMethods())
+
+let pageRouter
+
+if (isDev) {
+  pageRouter = require('./routers/dev-ssr.js')
+} else {
+  pageRouter = require('./routers/ssr.js')
+}
+
+// 处理 icon
+app.use(async (ctx, next) => {
+  if (ctx.path === '/favicon.ico') {
+    await send(ctx, '/favicon.ico', { root: path.join(__dirname, '../') })
+  } else {
+    await next()
   }
 })
 

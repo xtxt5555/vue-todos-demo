@@ -1,44 +1,75 @@
 <template>
-  <section class="real-app">
-    <input
-      v-model="message"
-      type="text"
-      class="add-input"
-      placeholder="接下去要做些什么?"
-      @keydown.enter="addTodo"
-    >
-    <Item
-      v-for="todo in filteredTodo"
-      :key="todo.key"
-      :todo="todo"
-      @toggle="toggleCompleted"
-      @delete="deleteTodo"
-    />
-    <Tabs
-      :state="state"
-      :left-num="leftNum"
-      @change-state="changeState"
-      @delete-completed="deleteCompleted"
-    />
-  </section>
+  <div class="wrapper">
+    <section class="real-app">
+      <tabs
+        :value="state"
+        @change="handleTabChange"
+      >
+        <tab
+          v-for="item in states"
+          :key="item"
+          :label="item"
+          :index="item"
+        />
+        <!-- <tab index="2">
+          <template #label>
+            <span :style="{color: 'red'}">tab2</span>
+          </template>
+          <p>content2</p>
+        </tab>
+        <tab
+          label="tab3"
+          index="3"
+        >
+          <p>content3</p>
+        </tab> -->
+      </tabs>
+
+      <input
+        v-model="message"
+        type="text"
+        class="add-input"
+        placeholder="接下去要做些什么?"
+        @keydown.enter="addTodo"
+      >
+      <Item
+        v-for="todo in filteredTodo"
+        :key="todo.key"
+        :todo="todo"
+        @toggle="toggleCompleted"
+        @delete="deleteTodo"
+      />
+      <Helper
+        :state="state"
+        :left-num="leftNum"
+        @change-state="changeState"
+        @delete-completed="deleteCompleted"
+      />
+    </section>
+  </div>
 </template>
 
 <script>
 import Item from './item.vue'
-import Tabs from './tabs.vue'
+import Helper from './helper.vue'
 let id = 0 // todo的key
 
 export default {
+  metaInfo: {
+    title: 'The Todo App'
+  },
   components: {
     Item,
-    Tabs
+    Helper
   },
   data () {
     return {
       todoList: [],
       message: '',
       state: 'all',
-      left: 0
+      left: 0,
+      tabValue: '1',
+      states: ['all', 'active', 'completed']
     }
   },
   computed: {
@@ -82,6 +113,9 @@ export default {
     },
     deleteCompleted () {
       this.todoList = this.todoList.filter(todo => todo.completed === false)
+    },
+    handleTabChange (val) {
+      this.state = val
     }
   }
 }
@@ -89,6 +123,8 @@ export default {
 
 <style lang="stylus" scoped>
   @import '~styles/variables'
+  .wrapper
+    min-height 350px
 
   .real-app
     margin 0 auto

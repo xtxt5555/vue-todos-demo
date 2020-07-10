@@ -5,11 +5,9 @@ const isDev = process.env.NODE_ENV === 'development'
 module.exports = {
   mode: process.env.NODE_ENV || 'production',
   target: 'web',
-  entry: path.join(__dirname, '../client/index.js'),
+  entry: path.join(__dirname, '../client/index'),
   output: {
     filename: 'bundle.[hash:8].js',
-    // path: path.join(__dirname, '../dist'),
-    // publicPath: 'http://127.0.0.1:8000/'
     path: path.join(__dirname, '../public'),
     publicPath: 'http://127.0.0.1:8000/public/'
   },
@@ -31,7 +29,7 @@ module.exports = {
         ]
       },
       {
-        test: /\.jsx$/,
+        test: /\.(jsx|js)$/,
         loader: 'babel-loader'
       },
       {
